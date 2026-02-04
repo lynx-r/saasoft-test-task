@@ -1,13 +1,18 @@
 <script setup lang="ts">
+import { Card } from "primevue";
 import AccountAdd from "./components/AccountAdd.vue";
 import AccountsCard from "./components/AccountsCard.vue";
 import TagNotice from "./components/TagNotice.vue";
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
-    <AccountAdd />
-    <TagNotice />
-    <AccountsCard />
-  </div>
+  <Card class="m-8">
+    <template #content>
+      <div class="flex flex-col gap-2">
+        <AccountAdd />
+        <TagNotice />
+        <AccountsCard />
+      </div>
+    </template>
+  </Card>
 </template>

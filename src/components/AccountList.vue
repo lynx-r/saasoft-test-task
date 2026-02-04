@@ -2,7 +2,7 @@
 import useAccountsStore from "@/stores/accounts";
 import { type Account } from "@/types/account";
 import { storeToRefs } from "pinia";
-import { Skeleton, VirtualScroller } from "primevue";
+import { Message, Skeleton, VirtualScroller } from "primevue";
 import AccountActions from "./AccountActions.vue";
 import AccountItem from "./AccountItem.vue";
 
@@ -13,13 +13,14 @@ const { getAccounts, deleteAccount } = accountsStore;
 
 <template>
   <VirtualScroller
+    v-if="accounts.length"
     :items="accounts"
     :item-size="60"
     :loading="isLoading"
     lazy
     show-loader
     keyField="id"
-    class="h-155!"
+    class="h-135!"
     @lazy-load="getAccounts"
   >
     <template #item="{ item }: { item: Account }">
@@ -32,4 +33,5 @@ const { getAccounts, deleteAccount } = accountsStore;
       </div>
     </template>
   </VirtualScroller>
+  <Message v-else severity="warn" icon="pi pi-exclamation-circle">Учетных записей нет</Message>
 </template>
