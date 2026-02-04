@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ACCOUNT_OPTIONS } from "@/constants/account";
 import useAccountsStore from "@/stores/accounts";
-import { AccountSchema, type Account } from "@/types";
+import { AccountSchema, type Account } from "@/types/account";
 import { Form, FormField, type FormSubmitEvent } from "@primevue/forms";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { IftaLabel, InputText, Password, Select, Toast } from "primevue";

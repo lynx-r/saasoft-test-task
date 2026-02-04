@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Button } from "primevue";
-
+defineProps(["deleting"]);
 const emit = defineEmits(["delete"]);
 </script>
 
@@ -10,6 +10,7 @@ const emit = defineEmits(["delete"]);
     severity="danger"
     variant="text"
     rounded
+    :loading="deleting"
     aria-label="Cancel"
     @click="emit('delete')"
   />

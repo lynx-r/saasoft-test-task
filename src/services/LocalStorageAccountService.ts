@@ -1,6 +1,6 @@
-import { mapAccountsToString, mapStringToAccounts } from '@/mappers'
-import type { Account } from '@/types'
-import type { ArrayResponse } from '@/types/Api'
+import { mapAccountsToString, mapStringToAccounts } from '@/mappers/account'
+import type { Account } from '@/types/account'
+import type { ArrayResponse } from '@/types/api'
 import { emptyAccount } from '@/utils/account'
 import type { AccountsService } from './AccountsService'
 

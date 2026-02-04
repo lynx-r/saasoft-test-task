@@ -1,4 +1,4 @@
-import type { AccountType } from '@/types'
+import type { AccountType } from '@/types/account'
 import type { SelectOption } from '@/types/components'
 
 export const ACCOUNT_OPTIONS: SelectOption<AccountType>[] = [

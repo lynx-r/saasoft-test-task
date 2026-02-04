@@ -1,39 +1,26 @@
 <script setup lang="ts">
 import useAccountsStore from "@/stores/accounts";
-import { type Account } from "@/types";
+import { type Account } from "@/types/account";
 import { storeToRefs } from "pinia";
-import { Skeleton, VirtualScroller, type VirtualScrollerLazyEvent } from "primevue";
-import { ref } from "vue";
+import { Skeleton, VirtualScroller } from "primevue";
 import AccountActions from "./AccountActions.vue";
 import AccountItem from "./AccountItem.vue";
 
 const accountsStore = useAccountsStore();
-const { accounts } = storeToRefs(accountsStore);
+const { accounts, isLoading, deletingId } = storeToRefs(accountsStore);
 const { getAccounts, deleteAccount } = accountsStore;
-const lazyLoading = ref(false);
-
-const onLazyLoad = async (event: VirtualScrollerLazyEvent) => {
-  lazyLoading.value = true;
-  await getAccounts(event);
-  lazyLoading.value = false;
-};
-
-const onDeleteAccount = (id: string) => {
-  lazyLoading.value = true;
-  deleteAccount(id);
-  lazyLoading.value = false;
-};
 </script>
 
 <template>
   <VirtualScroller
     :items="accounts"
     :item-size="60"
-    :loading="lazyLoading"
+    :loading="isLoading"
     lazy
+    show-loader
     keyField="id"
     class="h-155!"
-    @lazy-load="onLazyLoad"
+    @lazy-load="getAccounts"
   >
     <template #item="{ item }: { item: Account }">
       <div v-if="!item" class="flex align-items-center p-3" style="height: 50px">
@@ -41,7 +28,7 @@ const onDeleteAccount = (id: string) => {
       </div>
       <div v-else :key="item.id" class="flex h-15 gap-2 items-center">
         <AccountItem :account="item" />
-        <AccountActions @delete="onDeleteAccount(item.id)" />
+        <AccountActions :deleting="deletingId === item.id" @delete="deleteAccount(item.id)" />
       </div>
     </template>
   </VirtualScroller>

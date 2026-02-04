@@ -1,5 +1,5 @@
-import { type Account } from '@/types'
-import type { ArrayResponse } from '@/types/Api'
+import { type Account } from '@/types/account'
+import type { ArrayResponse } from '@/types/api'
 
 export interface AccountsService {
   getAccounts(first?: number, last?: number): Promise<ArrayResponse<Account>>

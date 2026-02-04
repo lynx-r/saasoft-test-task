@@ -1,4 +1,4 @@
-import { mapStringToTags } from '@/mappers'
+import { mapStringToTags } from '@/mappers/account'
 import z from 'zod'
 
 const AccountTypeSchema = z.enum(['ldap', 'local'])
