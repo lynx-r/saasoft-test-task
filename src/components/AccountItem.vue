@@ -27,6 +27,15 @@ const onFormSubmit = (e: FormSubmitEvent) => {
       updateAccount(e.values.id, e.values as Account);
       toast.add({ severity: "success", summary: "Аккаунт сохранён.", life: 3000 });
     }
+  } else {
+    const fieldErrors = Object.values(e.errors);
+    for (let err of fieldErrors) {
+      // @ts-ignore
+      const messages = err.map(({ message }) => message);
+      for (let msg of messages) {
+        toast.add({ severity: "error", summary: msg, life: 3000 });
+      }
+    }
   }
 };
 const submitFormProgrammatically = (): void => {
@@ -57,7 +66,7 @@ const submitFormProgrammatically = (): void => {
     :initial-values="account"
     :validate-on-value-update="false"
     validate-on-blur
-    class="grid gap-2 w-full"
+    class="grid gap-2"
     :class="gridClasses"
     @submit="onFormSubmit"
   >
