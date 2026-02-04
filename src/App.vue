@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import AccountAdd from "./components/AccountAdd.vue";
-import AccountList from "./components/AccountList.vue";
+import AccountsCard from "./components/AccountsCard.vue";
 import TagNotice from "./components/TagNotice.vue";
 </script>
 
@@ -8,6 +8,6 @@ import TagNotice from "./components/TagNotice.vue";
   <div class="flex flex-col gap-4">
     <AccountAdd />
     <TagNotice />
-    <AccountList />
+    <AccountsCard />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ACCOUNT_OPTIONS } from "@/constants/Account";
+import { ACCOUNT_OPTIONS } from "@/constants/account";
 import useAccountsStore from "@/stores/accounts";
 import { AccountSchema, type Account } from "@/types";
 import { Form, FormField, type FormSubmitEvent } from "@primevue/forms";
@@ -93,7 +93,7 @@ const submitFormProgrammatically = (): void => {
         fluid
         @blur="submitFormProgrammatically"
       />
-      <label for="tag">Пароль</label>
+      <label for="password">Пароль</label>
     </IftaLabel>
   </Form>
 </template>

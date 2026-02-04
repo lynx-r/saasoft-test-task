@@ -1,5 +1,5 @@
 import type { Account } from '@/types'
 
-export const defaultAccount = (): Account => {
+export const emptyAccount = (): Account => {
   return { id: crypto.randomUUID(), tag: '', type: 'local', login: '', password: '' }
 }
