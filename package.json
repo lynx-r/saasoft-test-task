@@ -17,8 +17,15 @@
     "format": "oxfmt src/"
   },
   "dependencies": {
+    "@primeuix/themes": "^2.0.3",
+    "@primevue/forms": "^4.5.4",
+    "@tailwindcss/vite": "^4.1.18",
+    "@vueuse/core": "^14.2.0",
     "pinia": "^3.0.4",
-    "vue": "beta"
+    "primeicons": "^7.0.0",
+    "primevue": "^4.5.4",
+    "vue": "beta",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.1",
@@ -40,6 +47,7 @@
     "npm-run-all2": "^8.0.4",
     "oxfmt": "^0.27.0",
     "oxlint": "~1.42.0",
+    "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "vite": "beta",
     "vite-plugin-vue-devtools": "^8.0.5",
