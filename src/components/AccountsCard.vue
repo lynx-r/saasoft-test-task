@@ -4,7 +4,7 @@ import AccountList from "./AccountList.vue";
 </script>
 
 <template>
-  <Panel header="Список аккаунтов">
+  <Panel header="Список учетных записей">
     <AccountList />
   </Panel>
 </template>
