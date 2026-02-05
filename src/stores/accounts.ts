@@ -6,7 +6,6 @@ import { onBeforeMount, ref, shallowRef, watch } from 'vue'
 
 const useAccountsStore = defineStore('accounts', () => {
   const scrollerLazyEvent = ref<VirtualScrollerLazyEvent>({ first: 0, last: 0 })
-  const accountsTotalCount = ref(0)
   const isFirstLoading = ref(false)
   const isLoading = ref(false)
   const isAdding = ref(false)
@@ -56,7 +55,6 @@ const useAccountsStore = defineStore('accounts', () => {
   onBeforeMount(async () => {
     isFirstLoading.value = true
     const totalCount = await accountsService.getAccountsTotalCount()
-    accountsTotalCount.value = totalCount
     accounts.value = Array.from({ length: totalCount })
     isFirstLoading.value = false
   })
