@@ -17,33 +17,21 @@ const useAccountsStore = defineStore('accounts', () => {
   const createAccount = async () => {
     isAdding.value = true
     await accountsService.createEmptyAccount()
-    const { data } = await accountsService.getAccounts(
-      scrollerLazyEvent.value.first,
-      scrollerLazyEvent.value.last + 1,
-    )
-    accounts.value = data
+    await getAccounts(scrollerLazyEvent.value)
     isAdding.value = false
   }
 
   const updateAccount = async (id: string, newAccount: Account) => {
     isUpdating.value = true
     await accountsService.updateAccount(id, newAccount)
-    const { data } = await accountsService.getAccounts(
-      scrollerLazyEvent.value.first,
-      scrollerLazyEvent.value.last,
-    )
-    accounts.value = data
+    await getAccounts(scrollerLazyEvent.value)
     isUpdating.value = false
   }
 
   const deleteAccount = async (id: string) => {
     deletingId.value = id
     await accountsService.deleteAccount(id)
-    const { data } = await accountsService.getAccounts(
-      scrollerLazyEvent.value.first,
-      scrollerLazyEvent.value.last,
-    )
-    accounts.value = data
+    await getAccounts(scrollerLazyEvent.value)
     deletingId.value = null
   }
 
