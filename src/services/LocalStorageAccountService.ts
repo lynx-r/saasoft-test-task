@@ -19,6 +19,11 @@ export class LocalStorageAccountService implements AccountsService {
     return { data: accounts, totalCount: accounts.length }
   }
 
+  async getAccountsTotalCount(): Promise<number> {
+    const { totalCount } = await this.getAccounts()
+    return totalCount
+  }
+
   async createEmptyAccount(): Promise<Account> {
     const { data: accounts } = await this.getAccounts()
     const account = emptyAccount()

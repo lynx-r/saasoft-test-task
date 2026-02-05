@@ -2,7 +2,7 @@
 import useAccountsStore from "@/stores/accounts";
 import type { Account } from "@/types/account";
 import { storeToRefs } from "pinia";
-import { Message, Skeleton, VirtualScroller } from "primevue";
+import { Message, VirtualScroller } from "primevue";
 import AccountActions from "./AccountActions.vue";
 import AccountItem from "./AccountItem.vue";
 import AccountsSkeleton from "./AccountsSkeleton.vue";
@@ -26,12 +26,12 @@ const { getAccounts: onLazyLoad, deleteAccount: onDeleteAccount } = accountsStor
     @lazy-load="onLazyLoad"
   >
     <template #item="{ item }: { item: Account }">
-      <div v-if="!item" class="flex align-items-center p-3" style="height: 50px">
-        <Skeleton width="60%" height="1rem" />
-      </div>
-      <div v-else :key="item.id" class="flex h-15 gap-2 items-center">
+      <div v-if="item" :key="item.id" class="flex h-15 gap-2 items-center">
         <AccountItem :account="item" />
         <AccountActions :deleting="deletingId === item.id" @delete="onDeleteAccount(item.id)" />
+      </div>
+      <div v-else>
+        {{ item === undefined }}
       </div>
     </template>
   </VirtualScroller>

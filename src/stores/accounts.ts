@@ -6,6 +6,7 @@ import { onBeforeMount, ref, shallowRef, watch } from 'vue'
 
 const useAccountsStore = defineStore('accounts', () => {
   const scrollerLazyEvent = ref<VirtualScrollerLazyEvent>({ first: 0, last: 0 })
+  const accountsTotalCount = ref(0)
   const isFirstLoading = ref(false)
   const isLoading = ref(false)
   const isAdding = ref(false)
@@ -17,6 +18,8 @@ const useAccountsStore = defineStore('accounts', () => {
   const createAccount = async () => {
     isAdding.value = true
     await accountsService.createEmptyAccount()
+    const totalCount = await accountsService.getAccountsTotalCount()
+    accounts.value = Array.from({ length: totalCount })
     await getAccounts(scrollerLazyEvent.value)
     isAdding.value = false
   }
@@ -31,7 +34,9 @@ const useAccountsStore = defineStore('accounts', () => {
   const deleteAccount = async (id: string) => {
     deletingId.value = id
     await accountsService.deleteAccount(id)
-    await getAccounts(scrollerLazyEvent.value)
+    const totalCount = await accountsService.getAccountsTotalCount()
+    accounts.value = Array.from({ length: totalCount })
+    await getAccounts({ ...scrollerLazyEvent.value, last: scrollerLazyEvent.value.last - 1 })
     deletingId.value = null
   }
 
@@ -50,7 +55,8 @@ const useAccountsStore = defineStore('accounts', () => {
 
   onBeforeMount(async () => {
     isFirstLoading.value = true
-    const { totalCount } = await accountsService.getAccounts()
+    const totalCount = await accountsService.getAccountsTotalCount()
+    accountsTotalCount.value = totalCount
     accounts.value = Array.from({ length: totalCount })
     isFirstLoading.value = false
   })
