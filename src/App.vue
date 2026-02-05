@@ -8,6 +8,7 @@ import TagNotice from "./components/TagNotice.vue";
 <template>
   <Card class="m-8">
     <template #content>
+      ?
       <div class="flex flex-col gap-2">
         <AccountAdd />
         <TagNotice />
