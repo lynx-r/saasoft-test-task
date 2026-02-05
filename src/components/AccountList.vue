@@ -30,9 +30,6 @@ const { getAccounts: onLazyLoad, deleteAccount: onDeleteAccount } = accountsStor
         <AccountItem :account="item" />
         <AccountActions :deleting="deletingId === item.id" @delete="onDeleteAccount(item.id)" />
       </div>
-      <div v-else>
-        {{ item === undefined }}
-      </div>
     </template>
   </VirtualScroller>
   <Message v-else severity="warn" icon="pi pi-exclamation-circle">Учетных записей нет</Message>
