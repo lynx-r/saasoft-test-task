@@ -73,7 +73,6 @@ const onAccountTypeChanged = (type: AccountType) => {
 </script>
 
 <template>
-  <div>???</div>
   <Form
     ref="formRef"
     :resolver
