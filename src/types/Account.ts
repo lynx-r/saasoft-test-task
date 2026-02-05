@@ -3,40 +3,46 @@ import z from 'zod'
 
 const AccountTypeSchema = z.enum(['ldap', 'local'])
 
-export const AccountSchema = z.object({
+const BaseAccount = z.object({
   id: z.uuid().default(() => crypto.randomUUID()),
   tag: z
     .string()
-    .min(0)
     .max(50)
     .regex(/(\w+;)*/)
     .trim()
     .refine(
-      (tagsStr: string) => {
+      (tagsStr) => {
         const tags = mapStringToTags(tagsStr).map(({ text }) => text)
         return new Set(tags).size === tags.length
       },
-      {
-        message: 'Теги не могут быть повторяющимися',
-      },
+      { message: 'Теги не могут быть повторяющимися' },
     ),
-  type: AccountTypeSchema,
   login: z
     .string()
     .min(3, 'Логин должен быть не менее 3 символов')
     .max(100, 'Логин не может быть больше 100 символов')
     .trim(),
-  password: z
-    .string()
-    .min(4, 'Пароль должен быть не меньше 4 символов')
-    .max(100, 'Пароль не может быть больше 100 символов')
-    .regex(/[A-Z]/, 'Пароль должен содержать минимум одну заглавную букву')
-    .regex(/[a-z]/, 'Пароль должен содержать минимум одну строчную букву')
-    .regex(/[0-9]/, 'Пароль должен содержать минимум одно число')
-    .regex(/[^a-zA-Z0-9]/, 'Пароль должен содержать минимум один специальный символ')
-    .trim()
-    .nullable(),
 })
+
+export const AccountSchema = z.discriminatedUnion('type', [
+  BaseAccount.extend({
+    type: z.literal('ldap'),
+    password: z.string().optional(),
+  }),
+
+  BaseAccount.extend({
+    type: z.literal('local'),
+    password: z
+      .string()
+      .min(4, 'Пароль должен быть не меньше 4 символов')
+      .max(100, 'Пароль не может быть больше 100 символов')
+      .regex(/[A-Z]/, 'Заглавная буква обязательна')
+      .regex(/[a-z]/, 'Строчная буква обязательна')
+      .regex(/[0-9]/, 'Цифра обязательна')
+      .regex(/[^a-zA-Z0-9]/, 'Спецсимвол обязателен')
+      .trim(),
+  }),
+])
 
 export type Account = z.infer<typeof AccountSchema>
 

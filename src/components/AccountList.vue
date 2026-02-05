@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import useAccountsStore from "@/stores/accounts";
-import { type Account } from "@/types/account";
+import type { Account } from "@/types/account";
 import { storeToRefs } from "pinia";
 import { Message, Skeleton, VirtualScroller } from "primevue";
 import AccountActions from "./AccountActions.vue";
 import AccountItem from "./AccountItem.vue";
+import AccountsSkeleton from "./AccountsSkeleton.vue";
 
 const accountsStore = useAccountsStore();
-const { accounts, isLoading, deletingId } = storeToRefs(accountsStore);
-const { getAccounts, deleteAccount } = accountsStore;
+const { accounts, isFirstLoading, isLoading, deletingId } = storeToRefs(accountsStore);
+const { getAccounts: onLazyLoad, deleteAccount: onDeleteAccount } = accountsStore;
 </script>
 
 <template>
+  <AccountsSkeleton v-if="isFirstLoading" />
   <VirtualScroller
-    v-if="accounts.length"
+    v-else-if="accounts.length"
     :items="accounts"
     :item-size="60"
     :loading="isLoading"
@@ -21,7 +23,7 @@ const { getAccounts, deleteAccount } = accountsStore;
     show-loader
     keyField="id"
     class="h-135!"
-    @lazy-load="getAccounts"
+    @lazy-load="onLazyLoad"
   >
     <template #item="{ item }: { item: Account }">
       <div v-if="!item" class="flex align-items-center p-3" style="height: 50px">
@@ -29,7 +31,7 @@ const { getAccounts, deleteAccount } = accountsStore;
       </div>
       <div v-else :key="item.id" class="flex h-15 gap-2 items-center">
         <AccountItem :account="item" />
-        <AccountActions :deleting="deletingId === item.id" @delete="deleteAccount(item.id)" />
+        <AccountActions :deleting="deletingId === item.id" @delete="onDeleteAccount(item.id)" />
       </div>
     </template>
   </VirtualScroller>
