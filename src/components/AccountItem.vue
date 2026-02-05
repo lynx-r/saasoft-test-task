@@ -33,8 +33,8 @@ const onFormSubmit = (e: FormSubmitEvent) => {
     }
   } else {
     const fieldErrors = Object.values(e.errors);
-    for (let errors of fieldErrors) {
-      // @ts-ignore
+    for (const errors of fieldErrors) {
+      // @ts-expect-error errors имеют тип any[]
       const summary = errors.map(({ message }) => message).join("\n");
       toast.add({ severity: "error", summary, life: 3000 });
     }
@@ -62,11 +62,11 @@ const onAccountTypeChanged = (type: AccountType) => {
   accountType.value = type;
   if (type === "ldap") {
     initialAccount.value.password = undefined;
-    // @ts-ignore
+    // @ts-expect-error form не предоставляет setFieldValue, но он там есть
     formRef.value?.setFieldValue("password", undefined);
   } else {
     initialAccount.value.password = "";
-    // @ts-ignore
+    // @ts-expect-error form не предоставляет setFieldValue, но он там есть
     formRef.value?.setFieldValue("password", "");
   }
 };
@@ -88,12 +88,12 @@ const onAccountTypeChanged = (type: AccountType) => {
       <input type="hidden" v-bind="$field.props" />
     </FormField>
     <IftaLabel>
-      <InputText id="tag" name="tag" fluid @blur="submitFormProgrammatically" />
-      <label for="tag">Метка</label>
+      <InputText id="tagId" name="tag" fluid @blur="submitFormProgrammatically" />
+      <label for="tagId">Метка</label>
     </IftaLabel>
     <IftaLabel>
       <Select
-        id="type"
+        id="typeId"
         :options="ACCOUNT_OPTIONS"
         option-label="optionLabel"
         option-value="optionValue"
@@ -101,21 +101,21 @@ const onAccountTypeChanged = (type: AccountType) => {
         fluid
         @value-change="onAccountTypeChanged"
       />
-      <label for="type">Тип записи</label>
+      <label for="typeId">Тип записи</label>
     </IftaLabel>
     <IftaLabel>
-      <InputText id="login" name="login" fluid @blur="submitFormProgrammatically" />
-      <label for="login">Логин</label>
+      <InputText id="loginId" name="login" fluid @blur="submitFormProgrammatically" />
+      <label for="loginId">Логин</label>
     </IftaLabel>
     <IftaLabel v-if="accountType === 'local'">
       <Password
-        id="password"
+        id="passwordId"
         name="password"
         toggle-mask
         fluid
         @blur="submitFormProgrammatically"
       />
-      <label for="password">Пароль</label>
+      <label for="passwordId">Пароль</label>
     </IftaLabel>
   </Form>
 </template>
