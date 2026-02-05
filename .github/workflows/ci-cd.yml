@@ -1,0 +1,32 @@
+name: Build and Deploy Vue App
+
+on:
+  push:
+    branches:
+      - main # Trigger the workflow on pushes to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # Run on a fresh Linux virtual machine
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4 # Use the community action to check out the code
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20' # Specify the desired Node.js version
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build # Run the build command
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3 # A popular action for deploying to GitHub Pages
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # The default token provided by GitHub
+          publish_dir: ./dist # The directory where your build artifacts are located
