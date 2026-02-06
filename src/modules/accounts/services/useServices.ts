@@ -1,4 +1,4 @@
-import type { UseServices } from '@/types/UseServices'
+import type { UseServices } from '../types/UseServices'
 import { LocalStorageAccountService } from './LocalStorageAccountService'
 
 const useServices = (): UseServices => {

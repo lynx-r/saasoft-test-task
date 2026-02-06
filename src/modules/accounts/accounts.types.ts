@@ -1,5 +1,8 @@
-import { mapStringToTags } from '@/mappers/account'
+import { mapStringToTags } from '@/modules/accounts/accounts.mappers'
+import type { NavigationItem as NavigationItemProps } from '@/types/navigation'
 import z from 'zod'
+
+export type NavigationItem = NavigationItemProps
 
 const AccountTypeSchema = z.enum(['ldap', 'local'])
 

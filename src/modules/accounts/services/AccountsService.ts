@@ -1,4 +1,4 @@
-import { type Account } from '@/types/account'
+import { type Account } from '@/modules/accounts/accounts.types'
 import type { ArrayResponse } from '@/types/api'
 
 export interface AccountsService {

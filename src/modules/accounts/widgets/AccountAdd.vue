@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useAccountsStore from "@/stores/accounts";
+import useAccountsStore from "@/modules/accounts/accounts.store";
 import { Button } from "primevue";
 
 const store = useAccountsStore();
