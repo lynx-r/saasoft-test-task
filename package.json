@@ -17,14 +17,18 @@
     "format": "oxfmt src/"
   },
   "dependencies": {
+    "@libs-for-dev/vue-modular-application": "^1.0.0",
     "@primeuix/themes": "^2.0.3",
     "@primevue/forms": "^4.5.4",
     "@tailwindcss/vite": "^4.1.18",
     "@vueuse/core": "^14.2.0",
+    "inversify": "^6.2.2",
     "pinia": "^3.0.4",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.4",
+    "reflect-metadata": "^0.2.2",
     "vue": "beta",
+    "vue-router": "^4.6.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {

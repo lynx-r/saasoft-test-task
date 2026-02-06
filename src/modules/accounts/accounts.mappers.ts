@@ -1,4 +1,4 @@
-import type { Account, AccountSerialized, TagSerialized } from '@/types/account'
+import type { Account, AccountSerialized, TagSerialized } from '@/modules/accounts/accounts.types'
 
 export const mapStringToTags = (tag: string): TagSerialized[] => {
   const arr = tag.split(/\s*;+\s*/)

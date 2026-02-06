@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import useAccountsStore from "@/stores/accounts";
-import type { Account } from "@/types/account";
+import useAccountsStore from "@/modules/accounts/accounts.store";
+import type { Account } from "@/modules/accounts/accounts.types";
 import { storeToRefs } from "pinia";
 import { Message, VirtualScroller } from "primevue";
 import AccountActions from "./AccountActions.vue";

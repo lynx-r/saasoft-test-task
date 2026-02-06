@@ -1,8 +1,8 @@
-import useServices from '@/services/useServices'
-import { type Account } from '@/types/account'
 import { defineStore } from 'pinia'
 import type { VirtualScrollerLazyEvent } from 'primevue/virtualscroller'
 import { onBeforeMount, ref, shallowRef, watch } from 'vue'
+import type { Account } from './accounts.types'
+import useServices from './services/useServices'
 
 const useAccountsStore = defineStore('accounts', () => {
   const scrollerLazyEvent = ref<VirtualScrollerLazyEvent>({ first: 0, last: 0 })

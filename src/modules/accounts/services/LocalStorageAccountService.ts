@@ -1,8 +1,8 @@
-import { ACCOUNTS_STORAGE_KEY } from '@/constants/account'
-import { mapAccountsToString, mapStringToAccounts } from '@/mappers/account'
-import type { Account } from '@/types/account'
+import { ACCOUNTS_STORAGE_KEY } from '@/modules/accounts/accounts.constants'
+import { mapAccountsToString, mapStringToAccounts } from '@/modules/accounts/accounts.mappers'
+import type { Account } from '@/modules/accounts/accounts.types'
+import { emptyAccount } from '@/modules/accounts/accounts.utils'
 import type { ArrayResponse } from '@/types/api'
-import { emptyAccount } from '@/utils/account'
 import type { AccountsService } from './AccountsService'
 
 export class LocalStorageAccountService implements AccountsService {
