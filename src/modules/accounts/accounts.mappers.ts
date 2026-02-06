@@ -1,11 +1,11 @@
-import type { Account, AccountSerialized, TagSerialized } from '@/modules/accounts/accounts.types'
+import type { Account, AccountSerialized, AccountTag } from '@/modules/accounts/accounts.types'
 
-export const mapStringToTags = (tag: string): TagSerialized[] => {
+export const mapStringToTags = (tag: string): AccountTag[] => {
   const arr = tag.split(/\s*;+\s*/)
   return arr.filter((t) => !!t).map((text) => ({ text }))
 }
 
-const mapTagsToString = (tags: TagSerialized[]): string =>
+const mapTagsToString = (tags: AccountTag[]): string =>
   tags?.map(({ text }) => text).join('; ') || ''
 
 export const mapAccountsToString = (accounts: Account[]): string => {

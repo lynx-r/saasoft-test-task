@@ -1,7 +1,7 @@
 import { ACCOUNTS_STORAGE_KEY } from '@/modules/accounts/accounts.constants'
+import { emptyAccount } from '@/modules/accounts/accounts.factories'
 import { mapAccountsToString, mapStringToAccounts } from '@/modules/accounts/accounts.mappers'
 import type { Account } from '@/modules/accounts/accounts.types'
-import { emptyAccount } from '@/modules/accounts/accounts.utils'
 import type { ArrayResponse } from '@/types/api'
 import type { AccountsService } from './AccountsService'
 

@@ -49,8 +49,8 @@ export const AccountSchema = z.discriminatedUnion('type', [
 
 export type Account = z.infer<typeof AccountSchema>
 
-export type TagSerialized = { text: string }
+export type AccountTag = { text: string }
 
-export type AccountSerialized = Omit<Account, 'tag'> & { tag: TagSerialized[] }
+export type AccountSerialized = Omit<Account, 'tag'> & { tag: AccountTag[] }
 
 export type AccountType = z.infer<typeof AccountTypeSchema>
