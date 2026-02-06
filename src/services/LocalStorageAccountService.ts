@@ -1,3 +1,4 @@
+import { ACCOUNTS_STORAGE_KEY } from '@/constants/account'
 import { mapAccountsToString, mapStringToAccounts } from '@/mappers/account'
 import type { Account } from '@/types/account'
 import type { ArrayResponse } from '@/types/api'
@@ -6,7 +7,7 @@ import type { AccountsService } from './AccountsService'
 
 export class LocalStorageAccountService implements AccountsService {
   async getAccounts(first?: number, last?: number): Promise<ArrayResponse<Account>> {
-    const accountsStr = localStorage.getItem('accounts')
+    const accountsStr = localStorage.getItem(ACCOUNTS_STORAGE_KEY)
     if (!accountsStr) {
       return { data: [], totalCount: 0 }
     }

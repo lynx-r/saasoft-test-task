@@ -12,7 +12,7 @@ export const mapStringToTags = (tag: string): TagSerialized[] => {
 }
 
 const mapTagsToString = (tags: TagSerialized[]): string =>
-  tags?.map(({ text }) => text).join(';') || ''
+  tags?.map(({ text }) => text).join('; ') || ''
 
 export const mapAccountsToString = (accounts: Account[]): string => {
   const value = accounts.map((acc) => ({

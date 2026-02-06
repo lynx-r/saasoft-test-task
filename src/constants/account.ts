@@ -5,3 +5,5 @@ export const ACCOUNT_OPTIONS: SelectOption<AccountType>[] = [
   { optionLabel: 'LDAP', optionValue: 'ldap' },
   { optionLabel: 'Локальная', optionValue: 'local' },
 ]
+
+export const ACCOUNTS_STORAGE_KEY = 'accounts'
