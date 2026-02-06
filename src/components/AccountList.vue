@@ -5,17 +5,15 @@ import { storeToRefs } from "pinia";
 import { Message, VirtualScroller } from "primevue";
 import AccountActions from "./AccountActions.vue";
 import AccountItem from "./AccountItem.vue";
-import AccountsSkeleton from "./AccountsSkeleton.vue";
 
 const accountsStore = useAccountsStore();
-const { accounts, isFirstLoading, isLoading, deletingId } = storeToRefs(accountsStore);
+const { accounts, isLoading, deletingId } = storeToRefs(accountsStore);
 const { getAccounts: onLazyLoad, deleteAccount: onDeleteAccount } = accountsStore;
 </script>
 
 <template>
-  <AccountsSkeleton v-if="isFirstLoading" />
   <VirtualScroller
-    v-else-if="accounts.length"
+    v-if="accounts.length"
     :items="accounts"
     :item-size="60"
     :loading="isLoading"
