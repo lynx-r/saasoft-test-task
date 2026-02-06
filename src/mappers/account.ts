@@ -2,13 +2,7 @@ import type { Account, AccountSerialized, TagSerialized } from '@/types/account'
 
 export const mapStringToTags = (tag: string): TagSerialized[] => {
   const arr = tag.split(/\s*;+\s*/)
-  if (arr[0] === '') {
-    arr.shift()
-  }
-  if (arr[arr.length - 1] === '') {
-    arr.pop()
-  }
-  return arr.map((text) => ({ text }))
+  return arr.filter((t) => !!t).map((text) => ({ text }))
 }
 
 const mapTagsToString = (tags: TagSerialized[]): string =>
