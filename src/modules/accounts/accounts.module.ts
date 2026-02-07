@@ -7,7 +7,6 @@ import type {
 import { Container } from 'inversify'
 import type { RouteRecordRaw } from 'vue-router'
 import type { NavigationItem } from './accounts.types'
-import { LocalStorageAccountService } from './services/LocalStorageAccountService'
 
 export class AccountsModule implements ClientModuleInterface<
   RouteRecordRaw[],
@@ -44,16 +43,7 @@ export class AccountsModule implements ClientModuleInterface<
   }
 
   getContainer(): ContainerPluginInterface<Container>[] {
-    const container = new Container()
-
-    return [
-      {
-        container,
-        install() {
-          container.bind('AccountsService').to(LocalStorageAccountService).inSingletonScope()
-        },
-      },
-    ]
+    return []
   }
 
   getWidgets(): VueWidgetsInterface[] {
