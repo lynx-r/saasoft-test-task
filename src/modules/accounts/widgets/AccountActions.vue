@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
 import { Button } from "primevue";
-defineProps(["deleting"]);
-const emit = defineEmits(["delete"]);
+import useAccountsStore from "../accounts.store";
+const { accountId } = defineProps<{ accountId: string }>();
+
+const store = useAccountsStore();
+
+const { deleteAccount: onDeleteAccount } = store;
+const { deletingId } = storeToRefs(store);
 </script>
 
 <template>
@@ -10,8 +16,8 @@ const emit = defineEmits(["delete"]);
     severity="danger"
     variant="text"
     rounded
-    :loading="deleting"
+    :loading="deletingId === accountId"
     aria-label="Cancel"
-    @click="emit('delete')"
+    @click="onDeleteAccount(accountId)"
   />
 </template>

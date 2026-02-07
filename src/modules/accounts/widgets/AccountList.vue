@@ -7,8 +7,8 @@ import AccountActions from "./AccountActions.vue";
 import AccountItem from "./AccountItem.vue";
 
 const accountsStore = useAccountsStore();
-const { accounts, isLoading, deletingId } = storeToRefs(accountsStore);
-const { getAccounts: onLazyLoad, deleteAccount: onDeleteAccount } = accountsStore;
+const { accounts, isLoading } = storeToRefs(accountsStore);
+const { getAccounts: onLazyLoad } = accountsStore;
 </script>
 
 <template>
@@ -26,7 +26,7 @@ const { getAccounts: onLazyLoad, deleteAccount: onDeleteAccount } = accountsStor
     <template #item="{ item }: { item: Account }">
       <div v-if="item" :key="item.id" class="flex h-15 gap-2 items-center">
         <AccountItem :account="item" />
-        <AccountActions :deleting="deletingId === item.id" @delete="onDeleteAccount(item.id)" />
+        <AccountActions :account-id="item.id" />
       </div>
     </template>
   </VirtualScroller>
