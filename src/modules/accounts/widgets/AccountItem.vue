@@ -6,7 +6,7 @@ import { Form, FormField, type FormSubmitEvent } from "@primevue/forms";
 import { zodResolver } from "@primevue/forms/resolvers/zod";
 import { IftaLabel, InputText, Password, Select, Toast } from "primevue";
 import { useToast } from "primevue/usetoast";
-import { computed, ref, shallowRef, useTemplateRef } from "vue";
+import { computed, nextTick, ref, shallowRef, useTemplateRef } from "vue";
 
 const toast = useToast();
 
@@ -58,7 +58,8 @@ const submitFormProgrammatically = (): void => {
     }
   }
 };
-const onAccountTypeChanged = (type: AccountType) => {
+
+const onAccountTypeChanged = async (type: AccountType) => {
   accountType.value = type;
   if (type === "ldap") {
     initialAccount.value.password = undefined;
@@ -69,6 +70,10 @@ const onAccountTypeChanged = (type: AccountType) => {
     // @ts-expect-error form не предоставляет setFieldValue, но он там есть
     formRef.value?.setFieldValue("password", "");
   }
+
+  await nextTick();
+
+  submitFormProgrammatically();
 };
 </script>
 
