@@ -3,9 +3,9 @@ import { emptyAccount } from '@/modules/accounts/accounts.factories'
 import { mapAccountsToString, mapStringToAccounts } from '@/modules/accounts/accounts.mappers'
 import type { Account } from '@/modules/accounts/accounts.types'
 import type { ArrayResponse } from '@/types/api'
-import type { AccountsService } from './AccountsService'
+import type AccountsService from './AccountsService'
 
-export class LocalStorageAccountService implements AccountsService {
+export default class LocalStorageAccountService implements AccountsService {
   async getAccounts(first?: number, last?: number): Promise<ArrayResponse<Account>> {
     const accountsStr = localStorage.getItem(ACCOUNTS_STORAGE_KEY)
     if (!accountsStr) {

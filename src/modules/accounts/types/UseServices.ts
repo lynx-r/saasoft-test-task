@@ -1,5 +1,5 @@
-import type { AccountsService } from '../services/accounts/AccountsService'
+import type AccountsService from '../services/accounts/AccountsService'
 
-export interface UseServices {
+export default interface UseServices {
   accountsService: AccountsService
 }

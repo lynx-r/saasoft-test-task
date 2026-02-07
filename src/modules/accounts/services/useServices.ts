@@ -1,5 +1,5 @@
-import type { UseServices } from '../types/UseServices'
-import { LocalStorageAccountService } from './accounts/LocalStorageAccountService'
+import type UseServices from '../types/UseServices'
+import LocalStorageAccountService from './accounts/LocalStorageAccountService'
 
 const useServices = (): UseServices => {
   return {
